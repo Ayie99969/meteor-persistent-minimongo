@@ -4,6 +4,11 @@ Simple client-side observer class that provides persistence for Meteor Collectio
 
 *based on a package by Jeff Mitchel https://github.com/jeffmitchel/meteor-local-persist*
 
+## Note
+
+This package is using `localstorage` to persist your collections,
+if you want to use the browsers indexedDB or webSQL use the new [frozeman:persistent-minimongo2](https://atmospherejs.com/frozeman/persistent-minimongo2) package!
+
 ## Installation:
 `$ meteor add frozeman:persistent-minimongo`
 
