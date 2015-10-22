@@ -40,15 +40,17 @@ PersistentMinimongo = function (collection) {
 
     persisters.push(self);
 
+    // Check if the localstorage is to big and reduce the current collection by 50 items, every 30s
+    Meteor.setInterval(function() {
+        self.capCollection();
+    }, 1000 * 30);
+
     // load from storage
     self.refresh(true);
 
     // Meteor.startup(function () {
     self.col.find({}).observe({
         added: function (doc) {
-
-            // Check if the localstorage is to big and reduce the current collection by 50 items
-            self.capCollection();
 
             // get or initialize tracking list
             var list = amplify.store(self.key);
