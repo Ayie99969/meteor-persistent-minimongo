@@ -130,14 +130,8 @@ PersistentMinimongo.prototype = {
                 var doc = amplify.store(self._makeDataKey(id));
                 if(!! doc) {
                     var id = doc._id;
-                    var foundDoc = self.col.findOne({_id: id});
-
-                    if(foundDoc) {
-                        delete doc._id;
-                        self.col.update({_id: id}, {$set: doc});
-                    } else {
-                        self.col.insert(doc);
-                    }
+                    delete doc._id;
+                    self.col.upsert({_id: id}, {$set: doc});
                 }
 
                 return !! doc;
